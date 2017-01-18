@@ -26,11 +26,11 @@ This is the secret sauce for how a Heroku deployment knows to create the webpack
     desc <<-DESC
 Compile assets with webpack
 Uses command defined with ReactOnRails.configuration.npm_build_production_command
-sh "cd client && `ReactOnRails.configuration.npm_build_production_command`"
+sh "`ReactOnRails.configuration.npm_build_production_command`"
     DESC
     task webpack: :environment do
       if ReactOnRails.configuration.npm_build_production_command.present?
-        sh "cd client && #{ReactOnRails.configuration.npm_build_production_command}"
+        sh "#{ReactOnRails.configuration.npm_build_production_command}"
       end
     end
 
@@ -50,4 +50,3 @@ Rake::Task["assets:precompile"]
     Rake::Task["react_on_rails:assets:symlink_non_digested_assets"].invoke
     Rake::Task["react_on_rails:assets:delete_broken_symlinks"].invoke
   end
-
